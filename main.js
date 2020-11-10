@@ -5,23 +5,21 @@ const newQuoteBtn = document.querySelector('.new-quote');
 const twitterBtn = document.getElementById('twitter');
 const loader = document.getElementById('loader');
 
-// Show Loading
-function loading() {
+function showLoadingSpinner() {
     loader.hidden = false;
     quoteContainer.hidden = true;
 }
 
-// Hide Loading
-function complete() {
+function hideLoadingSpinner() {
     if(!loader.hidden) {
         loader.hidden = true;
         quoteContainer.hidden = false;
     }
 }
 
-// Get Quote From API
-async function getQuote() {
-    loading();
+async function getQuoteFromAPI() {
+    showLoadingSpinner();
+    // We need to use a Proxy Url to make our API call in order to void CORS policy problems
     const proxyUrl = 'https://cors-anywhere.herokuapp.com/';
     const apiUrl = 'http://api.forismatic.com/api/1.0/?method=getQuote&lang=en&format=json';
 
@@ -42,9 +40,9 @@ async function getQuote() {
         }
         quoteText.innerText = data.quoteText;
         // Stop Loader, Show Quote
-        complete();
+        hideLoadingSpinner();
     } catch (error) {
-        throw error;
+        console.log(error);
     }
 }
 
