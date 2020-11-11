@@ -42,6 +42,7 @@ async function getQuoteFromAPI() {
         // Stop Loader, Show Quote
         hideLoadingSpinner();
     } catch (error) {
+        getQuoteFromAPI();
         console.log(error);
     }
 }
@@ -55,5 +56,5 @@ function tweetQuote() {
 }
 
 // Event Listeners
-newQuoteBtn.addEventListener('click',getQuote);
+newQuoteBtn.addEventListener('click',getQuoteFromAPI);
 twitterBtn.addEventListener('click',tweetQuote);
